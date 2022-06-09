@@ -1,13 +1,12 @@
-import { readFileSync, createWriteStream, writeFile } from "fs";
+import { readFileSync, createWriteStream } from "fs";
+import { writeFile } from 'fs/promises'
 
 export class GestionFichier {
   nbreSommet: number = 0;
   nbreArc: number = 0;
 
-  creerFichier(nomFichier: string) {
-    writeFile(nomFichier, "", { flag: "w" }, function (err) {
-      if (err) throw err;
-    });
+  async creerFichier(nomFichier: string) {
+    return writeFile(nomFichier, "", { flag: "w" });
   }
 
   //lecture du contenu du fichier nomFichier

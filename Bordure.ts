@@ -13,7 +13,9 @@ export class Bordure {
 
   // extraireMin(): Sommet {}
 
-  insertion(somme: number, longueur: number): void {}
+  insertion(sommet: Sommet, longueur: number): void {
+
+  }
 
   trierBordure() {
     this.sommets.sort((a, b) => a.potentiel - b.potentiel);

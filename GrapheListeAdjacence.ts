@@ -115,7 +115,7 @@ export class GrapheListeAdjacence {
 
   
 
-  rechercheDjisktra(sommetRacine: Sommet) {
+  async rechercheDjisktra(sommetRacine: Sommet) {
     // Le potentiel par défaut est +Infini (défini dans le constructeur de la classe Sommet)
     // Le père de chaque sommet est par défaut lui meme (défini dans le constructeur de la classe Sommet)
     
@@ -149,9 +149,19 @@ export class GrapheListeAdjacence {
     }
     
     // Afficher pour chaque sommet son potentiel et son père
+    let stringFichier = "";
+    stringFichier += `Arborescence des CPM du sommet ${sommetRacine.nom}\n`;
+
     for(const sommet of this.sommets) {
+      stringFichier += `a ${sommet.pere ? sommet.pere.nom : "none"} ${sommet.nom} ${sommet.pere ? sommet.pere.getPoidsArc(sommet) : 0}\n`
       console.log(`Sommet ${sommet.nom}: ${sommet.potentiel} | ${sommet.pere ? sommet.pere.nom : "none"}`);
     }
+
+
+    // Ecrire le résultat de l'algo dans un nouveau fichier grapheNew.txt
+    const gestionFichier = new GestionFichier();
+    await gestionFichier.creerFichier("grapheNew.txt");
+    gestionFichier.ecritureFin("grapheNew.txt", stringFichier);
 
   }
 }
