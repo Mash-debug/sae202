@@ -3,10 +3,10 @@ import { GestionFichier } from "./gestionFichier";
 
 const graphe = new GrapheListeAdjacence(7);
 
-const sommet5 = graphe.sommets.find((s) => s.nom === "5")!;
-const gestionFichier = new GestionFichier();
+const sommet0 = graphe.sommets.find((s) => s.nom === "0")!;
 
-console.log(graphe.sommets);
+graphe.rechercheDjisktra(sommet0);
+
 
 // gestionFichier.creerFichier("grapheNew.txt");
 // gestionFichier.ecritureFin("grapheNew.txt", graphe.sauvegarder());

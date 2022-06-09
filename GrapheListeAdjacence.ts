@@ -113,10 +113,46 @@ export class GrapheListeAdjacence {
     return stringFichier;
   }
 
-  rechercheDjisktra() {
+  
+
+  rechercheDjisktra(sommetRacine: Sommet) {
+    // Le potentiel par défaut est +Infini (défini dans le constructeur de la classe Sommet)
+    // Le père de chaque sommet est par défaut lui meme (défini dans le constructeur de la classe Sommet)
+    
+    sommetRacine.potentiel = 0;
+    sommetRacine.pere = null;
+    this.bordure.sommets.push(sommetRacine);
+
     while(!this.bordure.estVide()) {
-      
+      // Chercher le sommet de la bordure ayant le plus petit potentiel (tableau déjà trié)
+      // Le retirer de la bordure
+      this.bordure.trierBordure();
+      const sommetPlusPetitPotentiel = this.bordure.sommets.pop()!;
+
+      // Application de l'algorithme de Djikstra
+
+      const successeurs = this.getSuccesseurs(sommetPlusPetitPotentiel);
+
+      for(const succcesseur of successeurs) {
+        const poids = sommetPlusPetitPotentiel.potentiel + sommetPlusPetitPotentiel.getPoidsArc(succcesseur);
+        if(poids < succcesseur.potentiel) {
+          succcesseur.potentiel = poids;
+          succcesseur.pere = sommetPlusPetitPotentiel;
+
+          // Chercher si le successeur en question appartient à la bordure ; si non, on l'ajoute
+
+          if(!this.bordure.sommets.includes(succcesseur)) {
+            this.bordure.sommets.push(succcesseur);
+          }
+        }
+      }
     }
+    
+    // Afficher pour chaque sommet son potentiel et son père
+    for(const sommet of this.sommets) {
+      console.log(`Sommet ${sommet.nom}: ${sommet.potentiel} | ${sommet.pere ? sommet.pere.nom : "none"}`);
+    }
+
   }
 }
 

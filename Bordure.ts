@@ -11,7 +11,11 @@ export class Bordure {
     return this.sommets.length === 0;
   }
 
-  extraireMin(): Sommet {}
+  // extraireMin(): Sommet {}
 
   insertion(somme: number, longueur: number): void {}
+
+  trierBordure() {
+    this.sommets.sort((a, b) => a.potentiel - b.potentiel);
+  }
 }

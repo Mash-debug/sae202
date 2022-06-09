@@ -2,10 +2,15 @@ export class Sommet {
   nom: string;
   sommetArc: Array<Sommet> = [];
   poidsArc: { [key: string]: number } = {}; // clé: sommet, valeur: poids de l'arc
+  potentiel: number;
+  pere: Sommet | null
 
   constructor(nom: string) {
     this.nom = nom;
+    this.potentiel = Number.POSITIVE_INFINITY;
+    this.pere = this;
   }
+
   // Liste d'adjacence
 
   ajouterArc(sommet: Sommet, poids: number) {
