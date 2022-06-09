@@ -1,25 +1,17 @@
 import { Sommet } from "./Sommet";
 
 export class Bordure {
+  sommets: Sommet[];
 
-    sommets: Sommet[];
+  constructor() {
+    this.sommets = [];
+  }
 
-    constructor() {
-        this.sommets = [];
-    }
+  estVide(): boolean {
+    return this.sommets.length === 0;
+  }
 
-    estVide(): boolean {
-        return this.sommets.length === 0;
-    }
+  extraireMin(): Sommet {}
 
-    extraireMin(): Sommet {
-        
-    }
-
-    insertion(somme: number, longueur: number): void {
-
-    }
+  insertion(somme: number, longueur: number): void {}
 }
-
-
-
