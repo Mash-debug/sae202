@@ -124,10 +124,10 @@ export class GrapheListeAdjacence {
     this.bordure.sommets.push(sommetRacine);
 
     while(!this.bordure.estVide()) {
-      // Chercher le sommet de la bordure ayant le plus petit potentiel (tableau déjà trié)
+      // Chercher le sommet de la bordure ayant le plus petit potentiel (tableau déjà trié croissant)
       // Le retirer de la bordure
       this.bordure.trierBordure();
-      const sommetPlusPetitPotentiel = this.bordure.sommets.pop()!;
+      const sommetPlusPetitPotentiel = this.bordure.sommets.shift()!;
 
       // Application de l'algorithme de Djikstra
 
