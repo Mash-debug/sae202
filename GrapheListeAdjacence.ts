@@ -163,14 +163,8 @@ export class GrapheListeAdjacence {
     await gestionFichier.creerFichier("grapheNew.txt");
     gestionFichier.ecritureFin("grapheNew.txt", stringFichier);
 
+
   }
 }
 
-// Ajouter un arc de poids 7 au sommet 6 de destination sommet 2;
-// const sommet6 = graphe.sommets.find((s) => s.nom === "6")!;
-// const sommet2 = graphe.sommets.find((s) => s.nom === "2")!;
 
-// sommet6.ajouterArc(sommet2, 7);
-// console.log("Nombre d'arcs : ", graphe.getNbreArcs());
-// // console.log(sommet6!.existeArc(sommet2!));
-// // console.log(sommet6!.getPoidsArc(sommet2!));

@@ -12,6 +12,7 @@
   "dependencies": {
     "@types/node": "^17.0.34",
     "fs": "^0.0.1-security",
+    "readline-sync": "^1.4.10",
     "typescript": "^4.6.4"
   }
 }

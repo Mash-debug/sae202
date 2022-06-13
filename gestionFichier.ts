@@ -9,12 +9,12 @@ export class GestionFichier {
     return writeFile(nomFichier, "", { flag: "w" });
   }
 
-  //lecture du contenu du fichier nomFichier
+  // lecture du contenu du fichier nomFichier
   lecture(nomFichier: string): Array<string> {
     return readFileSync(nomFichier, "utf8").split("\n");
   }
 
-  //Formatage des données sous la forme de tableau de tableau
+  // ormatage des données sous la forme de tableau de tableau
   formaterDonnees(contenu: Array<string>) {
     let tabInfo: Array<string> = [];
     let tabContenu: Array<Array<string>> = [];
@@ -49,18 +49,3 @@ export class GestionFichier {
   }
 }
 
-//Test
-let gestionFichier = new GestionFichier();
-
-// //Lecture
-// let contenu = gestionFichier.lecture("grapheTest.txt");
-// console.log(contenu);
-
-//Formater
-let tabContenu = gestionFichier.formaterDonnees(
-  gestionFichier.lecture("grapheTest.txt")
-);
-// console.log(tabContenu, gestionFichier.nbreSommet, gestionFichier.nbreArc);
-
-// //Ecriture
-// gestionFichier.ecritureFin("grapheTest.txt", "a 12 13 14");
