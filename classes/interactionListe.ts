@@ -34,7 +34,7 @@ export class InteractionListe {
     }
 
 
-    choixUser(choix : number){
+    async choixUser(choix : number){
         let sommetSource: number | Sommet;
         let sommetDest: number | Sommet;
         let poids: number;
@@ -65,16 +65,27 @@ export class InteractionListe {
             case 5 :    
                 sommetSource = this.verif.sommetExiste(this.graphe.nbreSommets, "Veuillez entrer le sommet source (nombre) : ");
                 sommetDest = this.verif.sommetExiste(this.graphe.nbreSommets, "Veuillez entrer le sommet destination (nombre) : ");
-                poids = readlineSync.question() // continuer ici
+                poids = Number(readlineSync.question("Veuillez entrer le poids de l'arc : ")); 
+
                 sommetSource = this.graphe.sommets.find((s) => s.nom === sommetSource.toString())!;
                 sommetDest = this.graphe.sommets.find((s) => s.nom === sommetDest.toString())!;
 
-                sommetSource.ajouterArc(sommetDest, 0)
+                sommetSource.ajouterArc(sommetDest, poids);
+                console.log("L'arc a bien été ajouté !");
+
                 this.verif.messageContinuer("Appuyer sur Entrée pour continuer... ");
                 this.main();
                 break;
             
             case 6 :
+                sommetSource = this.verif.sommetExiste(this.graphe.nbreSommets, "Veuillez entrer le sommet source (nombre) : ");
+                sommetDest = this.verif.sommetExiste(this.graphe.nbreSommets, "Veuillez entrer le sommet destination (nombre) : ");
+
+                sommetSource = this.graphe.sommets.find((s) => s.nom === sommetSource.toString())!;
+                sommetDest = this.graphe.sommets.find((s) => s.nom === sommetDest.toString())!;
+
+                sommetSource.retirerArc(sommetDest);
+                console.log("L'arc a bien été supprimé !");
 
                 this.verif.messageContinuer("Appuyer sur Entrée pour continuer... ");
                 this.main();
@@ -82,17 +93,40 @@ export class InteractionListe {
             
             case 7 :
 
+                sommetSource = this.verif.sommetExiste(this.graphe.nbreSommets, "Veuillez entrer le sommet source (nombre) : ");
+                sommetDest = this.verif.sommetExiste(this.graphe.nbreSommets, "Veuillez entrer le sommet destination (nombre) : ");
+
+                sommetSource = this.graphe.sommets.find((s) => s.nom === sommetSource.toString())!;
+                sommetDest = this.graphe.sommets.find((s) => s.nom === sommetDest.toString())!;
+
+                sommetSource.existeArc(sommetDest) ? console.log("Un arc existe entre ces deux sommets !") : console.log("Aucun arc n'existe entre ces deux sommets !");
+
+
                 this.verif.messageContinuer("Appuyer sur Entrée pour continuer... ");
                 this.main();
                 break;
             
             case 8 :
+                sommetSource = this.verif.sommetExiste(this.graphe.nbreSommets, "Veuillez entrer le sommet source (nombre) : ");
+                sommetDest = this.verif.sommetExiste(this.graphe.nbreSommets, "Veuillez entrer le sommet destination (nombre) : ");
+
+                sommetSource = this.graphe.sommets.find((s) => s.nom === sommetSource.toString())!;
+                sommetDest = this.graphe.sommets.find((s) => s.nom === sommetDest.toString())!;
+
+                console.log(`Le poids de cet arc est de ${sommetSource.getPoidsArc(sommetDest)}`);
 
                 this.verif.messageContinuer("Appuyer sur Entrée pour continuer... ");
                 this.main();
                 break;
 
             case 9 :
+                sommetSource = this.verif.sommetExiste(this.graphe.nbreSommets, "Veuillez entrer le sommet source (nombre) : ");
+                sommetSource = this.graphe.sommets.find((s) => s.nom === sommetSource.toString())!;
+
+                console.log("Voici la liste des successeurs de ce sommet : ");
+                for(const successeur of this.graphe.getSuccesseurs(sommetSource)) {
+                    console.log(successeur);
+                }
 
                 this.verif.messageContinuer("Appuyer sur Entrée pour continuer... ");
                 this.main();
@@ -100,24 +134,45 @@ export class InteractionListe {
 
             case 10 :
 
+                sommetSource = this.verif.sommetExiste(this.graphe.nbreSommets, "Veuillez entrer le sommet source (nombre) : ");
+                sommetSource = this.graphe.sommets.find((s) => s.nom === sommetSource.toString())!;
+
+                console.log("Voici la liste des prédecesseurs de ce sommet : ");
+                for(const predecesseur of this.graphe.getPredecesseurs(sommetSource)) {
+                    console.log(predecesseur);
+                }
+
                 this.verif.messageContinuer("Appuyer sur Entrée pour continuer... ");
                 this.main();
                 break;
             
             case 11 :
 
+                sommetSource = this.verif.sommetExiste(this.graphe.nbreSommets, "Veuillez entrer le sommet source (nombre) : ");
+                sommetSource = this.graphe.sommets.find((s) => s.nom === sommetSource.toString())!;
+
+                console.log("Voici la liste des voisins de ce sommet : ");
+                for(const voisin of this.graphe.getVoisins(sommetSource)) {
+                    console.log(voisin);
+                }
+                
                 this.verif.messageContinuer("Appuyer sur Entrée pour continuer... ");
                 this.main();
                 break;
             
             case 12:
-
+                await this.graphe.sauvegarder();
+                console.log("Graphe sauvegardé ! => grapheSave.txt");
                 this.verif.messageContinuer("Appuyer sur Entrée pour continuer... ");
                 this.main();
                 break;
             
             case 13 :
+                sommetSource = this.verif.sommetExiste(this.graphe.nbreSommets, "Veuillez entrer le sommet source (nombre) : ");
+                sommetSource = this.graphe.sommets.find((s) => s.nom === sommetSource.toString())!;
 
+                await this.graphe.rechercheDjisktra(sommetSource);
+                console.log("L'algorithme de Djisktra a bien été appliqué ! => grapheDjikstra.txt");
                 this.verif.messageContinuer("Appuyer sur Entrée pour continuer... ");
                 this.main();
                 break;

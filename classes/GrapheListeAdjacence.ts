@@ -1,6 +1,7 @@
 import { Sommet } from "./Sommet";
 import { GestionFichier } from "./gestionFichier";
 import { Bordure } from './Bordure';
+import { writeFile } from "fs/promises";
 
 export class GrapheListeAdjacence {
   nbreSommets: number;
@@ -41,6 +42,7 @@ export class GrapheListeAdjacence {
         (Number(this.sommets[this.sommets.length - 1].nom) + 1).toString()
       )
     );
+    this.nbreSommets = this.sommets.length;
   }
 
   retirerSommet() {
@@ -52,6 +54,8 @@ export class GrapheListeAdjacence {
       sommet!.retirerArc(sommetRetire!);
       sommetRetire!.retirerArc(sommet!);
     }
+
+    this.nbreSommets = this.sommets.length;
   }
 
   getNbreArcs() {
@@ -90,7 +94,7 @@ export class GrapheListeAdjacence {
     ]; // Set pour éliminer les doublons
   }
 
-  sauvegarder() {
+  async sauvegarder() {
     let arcs: (string | number)[][] = [];
     let stringFichier = "";
 
@@ -110,12 +114,15 @@ export class GrapheListeAdjacence {
       stringFichier += "\n";
     }
 
-    return stringFichier;
+    // Ecrire le resultat dans un fichier save a part
+    const gestionFichier = new GestionFichier();
+    await gestionFichier.creerFichier("grapheSave.txt");
+    await writeFile("grapheSave.txt", stringFichier);
   }
 
   
 
-  async rechercheDjisktra(sommetRacine: Sommet) {
+  async rechercheDjisktra(sommetRacine: Sommet, isochrone: number = 0) {
     // Le potentiel par défaut est +Infini (défini dans le constructeur de la classe Sommet)
     // Le père de chaque sommet est par défaut lui meme (défini dans le constructeur de la classe Sommet)
     
@@ -133,19 +140,39 @@ export class GrapheListeAdjacence {
 
       const successeurs = this.getSuccesseurs(sommetPlusPetitPotentiel);
 
-      for(const succcesseur of successeurs) {
-        const poids = sommetPlusPetitPotentiel.potentiel + sommetPlusPetitPotentiel.getPoidsArc(succcesseur);
-        if(poids < succcesseur.potentiel) {
-          succcesseur.potentiel = poids;
-          succcesseur.pere = sommetPlusPetitPotentiel;
+      if(isochrone) {
 
-          // Chercher si le successeur en question appartient à la bordure ; si non, on l'ajoute
+        for(const succcesseur of successeurs) {
+          const poids = sommetPlusPetitPotentiel.potentiel + sommetPlusPetitPotentiel.getPoidsArc(succcesseur);
+          if(poids <= isochrone) {
+            succcesseur.potentiel = poids;
+            succcesseur.pere = sommetPlusPetitPotentiel;
+  
+            // Chercher si le successeur en question appartient à la bordure ; si non, on l'ajoute
+  
+            if(!this.bordure.sommets.includes(succcesseur)) {
+              this.bordure.sommets.push(succcesseur);
+            }
+          }
+        }
 
-          if(!this.bordure.sommets.includes(succcesseur)) {
-            this.bordure.sommets.push(succcesseur);
+      } else {
+        for(const succcesseur of successeurs) {
+          const poids = sommetPlusPetitPotentiel.potentiel + sommetPlusPetitPotentiel.getPoidsArc(succcesseur);
+          if(poids < succcesseur.potentiel) {
+            succcesseur.potentiel = poids;
+            succcesseur.pere = sommetPlusPetitPotentiel;
+  
+            // Chercher si le successeur en question appartient à la bordure ; si non, on l'ajoute
+  
+            if(!this.bordure.sommets.includes(succcesseur)) {
+              this.bordure.sommets.push(succcesseur);
+            }
           }
         }
       }
+
+      
     }
     
     // Afficher pour chaque sommet son potentiel et son père
@@ -160,10 +187,8 @@ export class GrapheListeAdjacence {
 
     // Ecrire le résultat de l'algo dans un nouveau fichier grapheNew.txt
     const gestionFichier = new GestionFichier();
-    await gestionFichier.creerFichier("grapheNew.txt");
-    gestionFichier.ecritureFin("grapheNew.txt", stringFichier);
-
-
+    await gestionFichier.creerFichier("grapheDjisktra.txt");
+    await writeFile("grapheDjisktra.txt", stringFichier);
   }
 }
 
