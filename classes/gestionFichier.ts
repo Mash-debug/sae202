@@ -14,7 +14,7 @@ export class GestionFichier {
     return readFileSync(nomFichier, "utf8").split("\n");
   }
 
-  // ormatage des données sous la forme de tableau de tableau
+  // Formatage des données sous la forme de tableau de tableau
   formaterDonnees(contenu: Array<string>) {
     let tabInfo: Array<string> = [];
     let tabContenu: Array<Array<string>> = [];
@@ -33,19 +33,6 @@ export class GestionFichier {
 
     return tabContenu;
   }
-
-  //Test
-  ecritureFin(nomFichier: string, donnees: string): void {
-    //Récupérer les données précédentes pour ajouter à la fin la donnée
-    let document: Array<string> = this.lecture(nomFichier);
-
-    let ecrire = createWriteStream(nomFichier);
-    for (let info = 0; info < document.length; info++) {
-      ecrire.write(document[info]);
-    }
-    ecrire.write(donnees + "\n");
-
-    ecrire.end();
-  }
+  
 }
 

@@ -1,6 +1,6 @@
 import * as readlineSync from "readline-sync";
 
-export class Verif{
+export class Verif {
     choix : number = 0;
     continuer : boolean = true;
     s : number = 0;

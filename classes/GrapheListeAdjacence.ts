@@ -14,7 +14,7 @@ export class GrapheListeAdjacence {
     this.initListeAdjacence();
   }
 
-  initListeAdjacence(): void {
+  private initListeAdjacence(): void {
     for (let i = 0; i < this.nbreSommets; i++) {
       this.sommets.push(new Sommet(i.toString()));
     }
