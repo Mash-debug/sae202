@@ -1,6 +1,6 @@
-import { GestionFichier } from "../classes/gestionFichier";
+import { GestionFichierListe } from "../classes/gestionFichierListe";
 
-const gestionFichier = new GestionFichier();
+const gestionFichier = new GestionFichierListe();
 
 test("GestionFichier", () => {
     expect(gestionFichier.nbreArc).toBe(0);

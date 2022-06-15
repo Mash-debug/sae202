@@ -1,7 +1,7 @@
 import { readFileSync, createWriteStream } from "fs";
 import { writeFile } from 'fs/promises'
 
-export class GestionFichier {
+export class GestionFichierListe {
   nbreSommet: number = 0;
   nbreArc: number = 0;
 

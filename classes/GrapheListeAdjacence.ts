@@ -1,5 +1,5 @@
 import { Sommet } from "./Sommet";
-import { GestionFichier } from "./gestionFichier";
+import { GestionFichierListe } from "./gestionFichierListe";
 import { Bordure } from './Bordure';
 import { writeFile } from "fs/promises";
 
@@ -19,7 +19,7 @@ export class GrapheListeAdjacence {
       this.sommets.push(new Sommet(i.toString()));
     }
 
-    let gestionFichier = new GestionFichier();
+    let gestionFichier = new GestionFichierListe();
 
     let tabContenu = gestionFichier.formaterDonnees(
       gestionFichier.lecture("grapheTest.txt")
@@ -115,7 +115,7 @@ export class GrapheListeAdjacence {
     }
 
     // Ecrire le resultat dans un fichier save a part
-    const gestionFichier = new GestionFichier();
+    const gestionFichier = new GestionFichierListe();
     await gestionFichier.creerFichier("grapheSave.txt");
     await writeFile("grapheSave.txt", stringFichier);
   }
@@ -186,7 +186,7 @@ export class GrapheListeAdjacence {
 
 
     // Ecrire le résultat de l'algo dans un nouveau fichier grapheNew.txt
-    const gestionFichier = new GestionFichier();
+    const gestionFichier = new GestionFichierListe();
     await gestionFichier.creerFichier("grapheDjisktra.txt");
     await writeFile("grapheDjisktra.txt", stringFichier);
   }

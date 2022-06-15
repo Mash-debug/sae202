@@ -9,7 +9,7 @@ test("Bordure", () => {
 
     const sommet1 = new Sommet("5");
     const sommet2 = new Sommet("4");
-    const sommet3 = new Sommet("3");
+    const sommet3 = new Sommet("3");    
 
     bordure.sommets.push(sommet1, sommet2, sommet3);
 
