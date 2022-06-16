@@ -1,4 +1,3 @@
-import { text } from 'stream/consumers';
 import {GestionFichier} from './GestionFichierMatrice';
 
 
@@ -97,7 +96,7 @@ export class MatriceAdjacence extends GestionFichier{
     }
 
      // Retourner le nombre de arc
-     public affgrapheMatrice() : Array<Array<number>>{
+    public affgrapheMatrice() : Array<Array<number>>{
         return this.grapheMatrice;
     }
 

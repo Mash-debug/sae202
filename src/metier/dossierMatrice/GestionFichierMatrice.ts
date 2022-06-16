@@ -1,7 +1,7 @@
 import { readFileSync, createWriteStream } from "fs";
 
 //class GestionFichier
-export class GestionFichier{
+export class GestionFichier{ 
 
 
     // Initialisation des variables
