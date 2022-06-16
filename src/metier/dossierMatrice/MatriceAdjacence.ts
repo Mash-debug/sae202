@@ -6,8 +6,8 @@ import {GestionFichier} from './GestionFichierMatrice';
 export class MatriceAdjacence extends GestionFichier{
 
     // Initisalition des variables
-    public nbreSommet : number;
-    public nbreArc : number;
+    public nbreSommet : number = 0;
+    public nbreArc : number = 0;
     protected grapheMatrice : Array<Array<number>> = [];
 
 

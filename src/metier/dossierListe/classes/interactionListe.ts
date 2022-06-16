@@ -8,7 +8,7 @@ export class InteractionListe {
     verif : Verif = new Verif();
     graphe: GrapheListeAdjacence = new GrapheListeAdjacence(7);
 
-    main(){
+    async main(){
         console.log("\n\n---------------------------");
         console.log("--- Interaction Liste ----");
         console.log("---------------------------\n");
@@ -30,7 +30,7 @@ export class InteractionListe {
         console.log("14 - Revenir au menu précédent\n");
 
         let choix = this.verif.choixBordure(0, 14, "Que souhaitez-vous faire ? : ");
-        this.choixUser(choix);
+        await this.choixUser(choix);
     }
 
 

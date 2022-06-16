@@ -5,8 +5,8 @@ export class GestionFichier{
 
 
     // Initialisation des variables
-    protected nbreSommet: number;
-    protected nbreArc : number;
+    protected nbreSommet: number = 0;
+    protected nbreArc : number = 0;
 
 
     //getter des variables

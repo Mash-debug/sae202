@@ -3,13 +3,17 @@ import { BellmanMatrice } from './BellmanMatrice';
 
 
 // class ResultatMatrice
-export class ResultatMatrice{
+export class ResultatMatrice {
 
     
     // Initialisation des variables
-    public dijkstra : DijkstraMatrice;
+    public dijkstra : DijkstraMatrice ;
     public bellman : BellmanMatrice;
 
+    constructor() {
+        this.bellman = new BellmanMatrice("grapheTest.txt", 0, 0);
+        this.dijkstra = new DijkstraMatrice("grapheTest.txt", 0, 0);
+    }
 
     // Initialisation de la class Bellman
     public initBellman(lien : string, depart : number, destination : number){
